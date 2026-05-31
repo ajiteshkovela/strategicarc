@@ -20,9 +20,9 @@ const dmSerif = DM_Serif_Display({
 })
 
 export const metadata: Metadata = {
-  title: "StrategicArc Consultants LLP",
+  title: "StrategicArc Consultants",
   description:
-    "Your integrated finance partner — Finance, Compliance, and Strategy. Done right. Done once.",
+    "Your trusted financial partner, every step of the way — Finance, Compliance, and Strategy.",
 }
 
 export default function RootLayout({

@@ -1,10 +1,8 @@
-const CONTACT = {
-  phone: "+91 8688791603",
-  phoneHref: "tel:+918688791603",
-  email: "strategicarc@outlook.com",
-  address:
-    "2602, Stanley A, SMR Vinay Iconia, Masjid Banda, Kondapur, Hyderabad, Telangana - 500084, India",
-} as const
+import { ContactBarSection } from "@/components/contact-bar-section"
+import { ContactUsButton } from "@/components/contact-modal"
+import { PhilosophyVisual } from "@/components/philosophy-visual"
+import { SiteNav } from "@/components/site-nav"
+import { SITE } from "@/lib/site-config"
 
 function CheckIcon() {
   return (
@@ -43,7 +41,7 @@ const stripItems = [
   "Virtual CFO",
   "Direct & Indirect Taxation",
   "Transfer Pricing",
-  "Audit & Assurance",
+  "Payroll Management",
   "FEMA & Corporate Law",
   "Business Advisory",
 ]
@@ -169,13 +167,14 @@ const services = [
   {
     icon: (
       <svg viewBox="0 0 24 24">
-        <polyline points="9 11 12 14 22 4" />
-        <path d="M21 12V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H16" />
+        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
       </svg>
     ),
-    title: "Audit & Assurance",
-    text: "Statutory, internal, and management audits conducted with a process-improvement mindset. We look for what can be strengthened, not just what is required to be checked. Every audit delivers a report and a roadmap.",
-    tag: "Assurance",
+    title: "Payroll Management",
+    text: "End-to-end payroll processing — salary structuring, statutory deductions (PF, ESI, PT), payslip generation, and compliance filings. Accurate, on-time payroll so your team is paid right and your obligations are met without administrative burden.",
+    tag: "Payroll & Compliance",
   },
   {
     icon: (
@@ -295,8 +294,6 @@ const whoCards = [
   },
 ]
 
-import { SiteNav } from "@/components/site-nav"
-
 const sessionItems = [
   "Review of your current compliance posture and open exposures",
   "Assessment of your financial reporting and MIS infrastructure",
@@ -310,7 +307,7 @@ export function StrategicArcSite() {
     <div className="strategicarc">
       <SiteNav />
 
-      <section className="hero" id="top">
+      <section className="hero reveal-on-scroll" id="top">
         <div>
           <div className="hero-eyebrow">Finance · Compliance · Strategy</div>
           <h1>
@@ -325,10 +322,15 @@ export function StrategicArcSite() {
             <strong>Finance. Compliance. Strategy. Done right. Done once.</strong>
           </p>
           <div className="hero-actions">
-            <a href="#cta" className="btn-primary">
+            <a
+              href="#cta"
+              className="btn-primary btn-animated"
+              data-track="cta_click"
+              data-track-label="Hero Diagnostic Session"
+            >
               Book a 60-min Diagnostic Session
             </a>
-            <a href="#approach" className="btn-secondary">
+            <a href="#approach" className="btn-secondary btn-animated">
               See how we work →
             </a>
           </div>
@@ -496,8 +498,8 @@ export function StrategicArcSite() {
         </div>
       </section>
 
-      <section id="philosophy" className="philosophy-section">
-        <div className="philosophy-layout philosophy-single">
+      <section id="philosophy" className="philosophy-section reveal-on-scroll">
+        <div className="philosophy-layout philosophy-split">
           <div className="philosophy-text">
             <div className="section-label">Our philosophy</div>
             <div className="section-title">
@@ -514,10 +516,11 @@ export function StrategicArcSite() {
             </p>
             <p>We measure our success by your growth. When your business is simpler, clearer, and more profitable than it was when we began — that is what we are here for.</p>
           </div>
+          <PhilosophyVisual />
         </div>
       </section>
 
-      <section className="cta-section" id="cta">
+      <section className="cta-section reveal-on-scroll" id="cta">
         <div>
           <div className="cta-label">Let&apos;s begin</div>
           <h2>
@@ -529,12 +532,7 @@ export function StrategicArcSite() {
             A 60-minute conversation to map your current financial and compliance landscape. We&apos;ll identify the gaps, the risks, and the opportunities — and share what we find in writing. No charge. No obligation. No sales pressure.
           </p>
           <div className="cta-actions">
-            <a href={`mailto:${CONTACT.email}`} className="btn-light">
-              Email us to schedule →
-            </a>
-            <a href={CONTACT.phoneHref} className="btn-cta-outline">
-              {CONTACT.phone}
-            </a>
+            <ContactUsButton />
           </div>
         </div>
         <div className="session-card">
@@ -555,38 +553,13 @@ export function StrategicArcSite() {
         </div>
       </section>
 
-      <div className="contact-bar" id="contact">
-        <div className="contact-bar-inner">
-          <div className="contact-bar-brand">
-            <h4>StrategicArc Consultants LLP</h4>
-            <p>Integrated finance, compliance, and strategy advisory</p>
-          </div>
-          <dl className="contact-details">
-            <div className="contact-detail">
-              <dt>Contact</dt>
-              <dd>
-                <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
-              </dd>
-            </div>
-            <div className="contact-detail">
-              <dt>Mail</dt>
-              <dd>
-                <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
-              </dd>
-            </div>
-            <div className="contact-detail contact-detail-address">
-              <dt>Address</dt>
-              <dd>{CONTACT.address}</dd>
-            </div>
-          </dl>
-        </div>
-      </div>
+      <ContactBarSection />
 
       <footer>
         <div className="footer-top">
           <div className="footer-brand">
-            <h3>StrategicArc Consultants LLP</h3>
-            <p>Your integrated Finance, Compliance, and Strategy partner — built for businesses that take clarity seriously.</p>
+            <h3>{SITE.name}</h3>
+            <p>{SITE.tagline}</p>
           </div>
           <div className="footer-links">
             <div className="footer-col">
@@ -595,7 +568,7 @@ export function StrategicArcSite() {
               <a href="#services">Direct Taxation</a>
               <a href="#services">GST & Indirect Tax</a>
               <a href="#services">Transfer Pricing</a>
-              <a href="#services">Audit & Assurance</a>
+              <a href="#services">Payroll Management</a>
               <a href="#services">Business Advisory</a>
             </div>
             <div className="footer-col">
@@ -607,14 +580,14 @@ export function StrategicArcSite() {
             </div>
             <div className="footer-col">
               <h4>Contact</h4>
-              <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
-              <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
-              <span className="footer-address">{CONTACT.address}</span>
+              <a href={SITE.contact.phoneHref}>{SITE.contact.phone}</a>
+              <a href={`mailto:${SITE.contact.email}`}>{SITE.contact.email}</a>
+              <span className="footer-address">{SITE.contact.addressFull}</span>
             </div>
           </div>
         </div>
         <div className="footer-bottom">
-          <p>© {new Date().getFullYear()} StrategicArc Consultants LLP. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>
           <div className="footer-tagline">Finance. Compliance. Strategy. Done right. Done once.</div>
         </div>
       </footer>

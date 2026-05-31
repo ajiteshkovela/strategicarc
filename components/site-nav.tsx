@@ -1,6 +1,8 @@
 "use client"
 
+import Image from "next/image"
 import { useEffect, useState } from "react"
+import { SITE } from "@/lib/site-config"
 
 const navLinks = [
   { label: "Our Approach", href: "#approach" },
@@ -27,8 +29,16 @@ export function SiteNav() {
 
   return (
     <nav>
-      <a href="#" className="nav-logo" onClick={() => setOpen(false)}>
-        Strategic<span>Arc</span>
+      <a href="#" className="nav-logo-block" onClick={() => setOpen(false)}>
+        <Image
+          src={SITE.logo.src}
+          alt={SITE.logo.alt}
+          width={200}
+          height={54}
+          className="nav-logo-img"
+          priority
+        />
+        <span className="nav-tagline">{SITE.navTagline}</span>
       </a>
 
       <button
@@ -46,11 +56,23 @@ export function SiteNav() {
 
       <div id="site-nav-menu" className={`nav-links${open ? " nav-links-open" : ""}`}>
         {navLinks.map((link) => (
-          <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
+          <a
+            key={link.href}
+            href={link.href}
+            data-track="nav_click"
+            data-track-label={link.label}
+            onClick={() => setOpen(false)}
+          >
             {link.label}
           </a>
         ))}
-        <a href="#cta" className="nav-cta" onClick={() => setOpen(false)}>
+        <a
+          href="#cta"
+          className="nav-cta btn-animated"
+          data-track="cta_click"
+          data-track-label="Book a Session"
+          onClick={() => setOpen(false)}
+        >
           Book a Session
         </a>
       </div>
