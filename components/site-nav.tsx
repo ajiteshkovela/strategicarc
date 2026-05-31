@@ -33,12 +33,11 @@ export function SiteNav() {
         <Image
           src={SITE.logo.src}
           alt={SITE.logo.alt}
-          width={200}
-          height={54}
+          width={280}
+          height={151}
           className="nav-logo-img"
           priority
         />
-        <span className="nav-tagline">{SITE.navTagline}</span>
       </a>
 
       <button

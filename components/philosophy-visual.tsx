@@ -16,12 +16,11 @@ export function PhilosophyVisual() {
           <Image
             src={SITE.logo.src}
             alt=""
-            width={220}
-            height={118}
+            width={320}
+            height={172}
             className="philosophy-logo-img"
           />
         </div>
-        <p className="philosophy-visual-tagline">{SITE.navTagline}</p>
         <ul className="philosophy-pillars">
           {pillars.map((p) => (
             <li key={p.label}>
