@@ -280,7 +280,7 @@ const whoCards = [
   {
     badge: "Founder-led",
     title: "Growth-stage companies",
-    text: "Startups and SMEs scaling from ₹5Cr to ₹100Cr+ who need financial infrastructure, investor-grade reporting, and strategic clarity to support the next phase of growth.",
+    text: "From day one to ₹100Cr+. We work with founders and SMEs who want the financial foundation built right from the start — not retrofitted later.",
   },
   {
     badge: "Multi-entity",
@@ -431,12 +431,7 @@ export function StrategicArcSite() {
             </div>
           ))}
         </div>
-        <div className="services-note">
-          <InfoIcon />
-          <p>
-            We maintain a <strong>deliberately limited client roster</strong> to ensure every engagement receives the depth of attention it deserves. If we take on your business, we know it inside out. This is what makes a genuine partnership possible.
-          </p>
-        </div>
+
       </section>
 
       <section className="diff" id="differentiators">

@@ -26,7 +26,7 @@ function InstagramIcon() {
 
 const socialLinks = [
   { label: "LinkedIn", href: SITE.social.linkedin, icon: LinkedInIcon },
-  { label: "Twitter / X", href: SITE.social.twitter, icon: XIcon },
+  // { label: "Twitter / X", href: SITE.social.twitter, icon: XIcon },
   { label: "Instagram", href: SITE.social.instagram, icon: InstagramIcon },
 ] as const
 

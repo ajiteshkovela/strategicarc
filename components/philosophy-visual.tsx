@@ -21,6 +21,7 @@ export function PhilosophyVisual() {
             className="philosophy-logo-img"
           />
         </div>
+        <p className="philosophy-visual-tagline">Built on Trust. Driven by Growth.</p>
         <ul className="philosophy-pillars">
           {pillars.map((p) => (
             <li key={p.label}>

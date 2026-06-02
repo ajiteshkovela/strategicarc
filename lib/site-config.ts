@@ -20,8 +20,8 @@ export const SITE = {
   },
   social: {
     linkedin: "https://www.linkedin.com/company/strategicarcconsultants/",
-    twitter: "https://x.com/strategicarc",
-    instagram: "https://www.instagram.com/strategicarc",
+    // twitter: "https://x.com/strategicarc",
+    instagram: "https://www.instagram.com/strategic_arc/?utm_source=ig_web_button_share_sheet",
   },
   logo: {
     src: "/strategicarc-logo.png",
