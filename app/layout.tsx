@@ -20,9 +20,21 @@ const dmSerif = DM_Serif_Display({
 })
 
 export const metadata: Metadata = {
-  title: "StrategicArc Consultants",
-  description:
-    "Your trusted financial partner, every step of the way — Finance, Compliance, and Strategy.",
+  metadataBase: new URL("https://strategicarc.co.in"), // Updated to client's exact domain
+  title: "StrategicArc Consultants LLP | Integrated Finance, Compliance & Strategy",
+  description: "Your embedded Virtual CFO and compliance partner. Eliminating the cost and confusion of fragmented corporate advice across India.",
+  keywords: ["Virtual CFO Hyderabad", "GST compliance", "Transfer Pricing", "Tax planning India", "StrategicArc", "Banjara Hills CA consultants"],
+  alternates: {
+    canonical: "/", 
+  },
+  openGraph: {
+    title: "StrategicArc Consultants LLP",
+    description: "Finance. Compliance. Strategy. Done right. Done once.",
+    url: "https://strategicarc.co.in", // Updated to client's exact domain
+    siteName: "StrategicArc",
+    locale: "en_IN",
+    type: "website",
+  }
 }
 
 export default function RootLayout({
