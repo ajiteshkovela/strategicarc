@@ -27,4 +27,8 @@ export type AnalyticsStats = {
   byType: Record<string, number>
   byDay: { date: string; pageviews: number; engagements: number }[]
   recent: AnalyticsEvent[]
+  diagnostics?: {
+    redisUrl: string
+    redisToken: string
+  }
 }

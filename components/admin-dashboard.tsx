@@ -89,6 +89,30 @@ export function AdminDashboard() {
           database and set <code>UPSTASH_REDIS_REST_URL</code> and{" "}
           <code>UPSTASH_REDIS_REST_TOKEN</code> in Vercel → Settings → Environment Variables.
           Also set <code>ADMIN_PASSWORD</code> for dashboard access.
+          {stats.diagnostics && (
+            <div style={{ marginTop: "12px", fontSize: "12px", borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: "10px" }}>
+              <div style={{ fontWeight: "bold", marginBottom: "4px" }}>Server-side Environment Variables (Diagnostics):</div>
+              <ul style={{ margin: "4px 0 0 16px", padding: 0, listStyleType: "disc" }}>
+                <li>
+                  <code>UPSTASH_REDIS_REST_URL</code>:{" "}
+                  <span style={{ color: stats.diagnostics.redisUrl === "Missing" ? "#ef4444" : "#22c55e", fontWeight: "bold" }}>
+                    {stats.diagnostics.redisUrl}
+                  </span>
+                </li>
+                <li>
+                  <code>UPSTASH_REDIS_REST_TOKEN</code>:{" "}
+                  <span style={{ color: stats.diagnostics.redisToken === "Missing" ? "#ef4444" : "#22c55e", fontWeight: "bold" }}>
+                    {stats.diagnostics.redisToken}
+                  </span>
+                </li>
+              </ul>
+              {(stats.diagnostics.redisUrl === "Missing" || stats.diagnostics.redisToken === "Missing") && (
+                <div style={{ marginTop: "8px", fontSize: "11px", color: "#666" }}>
+                  💡 <strong>Tip:</strong> If you already added these in Vercel, make sure you <strong>redeploy</strong> your project in Vercel so the changes take effect.
+                </div>
+              )}
+            </div>
+          )}
         </div>
       )}
 

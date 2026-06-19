@@ -143,6 +143,18 @@ function aggregateStats(events: AnalyticsEvent[]): AnalyticsStats {
 
 export async function getAnalyticsStats(): Promise<AnalyticsStats> {
   const redis = getRedis()
+  const redisUrl = process.env.UPSTASH_REDIS_REST_URL?.trim()
+  const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN?.trim()
+
+  const diagnostics = {
+    redisUrl: redisUrl
+      ? `Present (length: ${redisUrl.length}, starts with: ${redisUrl.slice(0, 15)}...)`
+      : "Missing",
+    redisToken: redisToken
+      ? `Present (length: ${redisToken.length}, starts with: ${redisToken.slice(0, 5)}...)`
+      : "Missing",
+  }
+
   if (redis) {
     const raw = await redisFetch(["LRANGE", "sa:events", 0, MAX_EVENTS - 1])
     const events: AnalyticsEvent[] = []
@@ -157,12 +169,16 @@ export async function getAnalyticsStats(): Promise<AnalyticsStats> {
         }
       }
     }
-    return aggregateStats(events)
+    const stats = aggregateStats(events)
+    stats.diagnostics = diagnostics
+    return stats
   }
 
   if (process.env.NODE_ENV === "development") {
     const events = await readFileEvents()
-    return aggregateStats(events)
+    const stats = aggregateStats(events)
+    stats.diagnostics = diagnostics
+    return stats
   }
 
   return {
@@ -175,5 +191,6 @@ export async function getAnalyticsStats(): Promise<AnalyticsStats> {
     byType: {},
     byDay: [],
     recent: [],
+    diagnostics,
   }
 }
