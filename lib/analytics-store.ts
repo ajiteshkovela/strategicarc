@@ -21,26 +21,49 @@ async function writeFileEvents(events: AnalyticsEvent[]) {
 }
 
 function getRedis() {
-  const url = process.env.UPSTASH_REDIS_REST_URL
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN
+  let url = process.env.UPSTASH_REDIS_REST_URL?.trim()
+  let token = process.env.UPSTASH_REDIS_REST_TOKEN?.trim()
   if (!url || !token) return null
+
+  // Strip quotes if they were added in the env settings
+  if (url.startsWith('"') && url.endsWith('"')) url = url.slice(1, -1)
+  if (token.startsWith('"') && token.endsWith('"')) token = token.slice(1, -1)
+  if (url.startsWith("'") && url.endsWith("'")) url = url.slice(1, -1)
+  if (token.startsWith("'") && token.endsWith("'")) token = token.slice(1, -1)
+
   return { url, token }
 }
 
 async function redisFetch(command: (string | number)[]) {
   const redis = getRedis()
   if (!redis) return null
-  const res = await fetch(`${redis.url}`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${redis.token}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(command),
-  })
-  if (!res.ok) return null
-  const data = (await res.json()) as { result: unknown }
-  return data.result
+  
+  try {
+    const res = await fetch(redis.url, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${redis.token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(command),
+    })
+
+    if (!res.ok) {
+      const errorText = await res.text()
+      console.error(`[analytics-store] Upstash Redis request failed with status ${res.status}: ${errorText}`)
+      return null
+    }
+
+    const data = (await res.json()) as { result: unknown; error?: string }
+    if (data.error) {
+      console.error(`[analytics-store] Upstash Redis returned error: ${data.error}`)
+      return null
+    }
+    return data.result
+  } catch (err: any) {
+    console.error("[analytics-store] Upstash Redis connection error:", err?.message || err)
+    return null
+  }
 }
 
 export function isAnalyticsConfigured() {
